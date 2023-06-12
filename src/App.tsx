@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import SignIn from "./components/SignIn";
+import HomePage from "./components/HomePage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignUp from "./components/SignUp";
+
+export const UserContext = createContext("");
+export const ChangeUserContext = createContext((newUser: string) => {});
 
 function App() {
+  const [user, changeUser] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode>
+      <UserContext.Provider value={user}>
+        <ChangeUserContext.Provider value={changeUser}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/SignUp" element={<SignUp />} />
+              <Route path="/SignIn" element={<SignIn />} />
+              <Route path="/" element={<HomePage />} />
+            </Routes>
+          </BrowserRouter>
+        </ChangeUserContext.Provider>
+      </UserContext.Provider>
+    </React.StrictMode>
   );
 }
 

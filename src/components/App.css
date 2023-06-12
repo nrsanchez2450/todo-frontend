@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  background-color: #CBC3E3;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  margin-left: 10px;
+  margin-top: 20px;
+  background-color: #ffffff;
+}
+
+button {
+  border: 2px solid white;
+  background-color: blueviolet;
+  margin-left: 230px;
+  color: #ffffff;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+p {
+  display: inline;
+}
+
