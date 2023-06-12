@@ -73,7 +73,7 @@ function HomePage(): JSX.Element {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id: id }),
+          body: JSON.stringify({ id: id, completed: true }),
         });
       }
     });
@@ -82,6 +82,8 @@ function HomePage(): JSX.Element {
 
   const deleteAll = (): void => {
     setItems([]);
+    setTasksRemaining(0);
+
     fetch("/clearTasks", {
       method: "POST",
       headers: {
@@ -102,14 +104,15 @@ function HomePage(): JSX.Element {
         },
       });
       const body = await response.json();
+      alert(body.id);
       const newItemObject: Item = {
-        id: body,
+        id: body.id,
         body: newItem,
         completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-      addToDB(newItem);
+      addToDB(newItemObject.body);
     }
   };
 
@@ -141,6 +144,7 @@ function HomePage(): JSX.Element {
               <li key={item.id}>
                 <p className={item.completed ? "strikethrough" : ""}>
                   {item.body}
+                  {item.id}
                 </p>
                 <input
                   type="checkbox"
