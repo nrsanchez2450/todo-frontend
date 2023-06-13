@@ -1,6 +1,7 @@
 {
   "name": "todo-frontend",
   "version": "0.1.0",
+  "proxy": "http://13.215.108.107:3000/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",

@@ -51,7 +51,6 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ user: username, body: body }),
     });
   }
-
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
