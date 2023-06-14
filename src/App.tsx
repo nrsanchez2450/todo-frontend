@@ -6,7 +6,7 @@ import SignUp from "./components/SignUp";
 
 export const UserContext = createContext("");
 export const ChangeUserContext = createContext((newUser: string) => {});
-export const BASE_URL = "http://13.215.108.107:3001/";
+export const BASE_URL = "http://13.215.108.107:3001";
 
 function App() {
   const [user, changeUser] = useState("");
