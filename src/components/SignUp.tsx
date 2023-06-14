@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../App";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
@@ -14,7 +15,7 @@ export default function SignUp() {
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await fetch("/register", {
+    const response = await fetch(`${BASE_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

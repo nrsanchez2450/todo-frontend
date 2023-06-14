@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { ChangeUserContext, UserContext } from "../App";
+import { BASE_URL, ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 interface Item {
@@ -20,7 +20,7 @@ function HomePage(): JSX.Element {
   // Loading user's task on login
   useEffect(() => {
     async function fetchTasks() {
-      const response = await fetch("/getTasks", {
+      const response = await fetch(`${BASE_URL}/getTasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function HomePage(): JSX.Element {
   }, [username]);
 
   function addToDB(body: string) {
-    fetch("/addTask", {
+    fetch(`${BASE_URL}/addTask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function HomePage(): JSX.Element {
       return index;
 
       async function updateToDB(id: number) {
-        fetch("/updateTask", {
+        fetch(`${BASE_URL}/updateTask`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +83,7 @@ function HomePage(): JSX.Element {
     setItems([]);
     setTasksRemaining(0);
 
-    fetch("/clearTasks", {
+    fetch(`${BASE_URL}/clearTasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ function HomePage(): JSX.Element {
     if (!newItem) {
       return;
     } else {
-      const response = await fetch("/matchId", {
+      const response = await fetch(`${BASE_URL}/matchId`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { ChangeUserContext } from "../App";
+import { BASE_URL, ChangeUserContext } from "../App";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
@@ -11,7 +11,7 @@ export default function SignIn() {
 
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await fetch("/login", {
+    const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
