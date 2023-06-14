@@ -103,7 +103,6 @@ function HomePage(): JSX.Element {
         },
       });
       const body = await response.json();
-      alert(body.id);
       const newItemObject: Item = {
         id: body.id,
         body: newItem,
@@ -143,7 +142,6 @@ function HomePage(): JSX.Element {
               <li key={item.id}>
                 <p className={item.completed ? "strikethrough" : ""}>
                   {item.body}
-                  {item.id}
                 </p>
                 <input
                   type="checkbox"
