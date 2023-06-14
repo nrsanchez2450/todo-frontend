@@ -42,6 +42,7 @@ function HomePage(): JSX.Element {
         );
       }
     }
+    fetchTasks();
   }, []);
 
   useEffect(() => {
