@@ -24,7 +24,7 @@ export default function SignUp() {
     if (response.status === 201) {
       alert("Account created");
     } else {
-      alert("Error creating account");
+      alert(`${response.status}, Error creating account`);
     }
   };
 
