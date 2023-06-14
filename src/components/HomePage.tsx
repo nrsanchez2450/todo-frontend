@@ -29,11 +29,19 @@ function HomePage(): JSX.Element {
       });
 
       if (response.ok) {
-        const tasks: Item[] = await response.json();
-        setItems(tasks);
+        try {
+          const tasks: Item[] = await response.json();
+          setItems(tasks);
+        } catch (error) {
+          console.error("Error parsing JSON response:", error);
+        }
+      } else {
+        console.error(
+          "Failed to fetch tasks. Response status:",
+          response.status
+        );
       }
     }
-    fetchTasks();
   }, []);
 
   useEffect(() => {
