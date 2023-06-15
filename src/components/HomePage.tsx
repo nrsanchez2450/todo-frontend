@@ -20,18 +20,17 @@ function HomePage(): JSX.Element {
   // Loading user and tasks on login
   useEffect(() => {
     async function loadUser() {
-      if (username) {
-        return;
-      } else {
-        try {
-          const response = await fetch(`${BASE_URL}/checkToken`, {
-            method: "GET",
-            credentials: "include",
-          });
+      if (!username) {
+        const response = await fetch(`${BASE_URL}/checkToken`, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (response.ok) {
+          alert("here1");
           const responseJson = await response.json();
           changeUser(responseJson.user);
-        } catch (e) {
-          alert(e);
+        } else {
+          navigate("/SignIn");
         }
       }
     }
@@ -136,7 +135,7 @@ function HomePage(): JSX.Element {
   };
 
   const handleSignOut = (): void => {
-    changeUser("");
+    navigate("/SignIn");
   };
 
   return (
@@ -166,7 +165,7 @@ function HomePage(): JSX.Element {
                 </p>
                 <input
                   type="checkbox"
-                  checked={item.completed}
+                  defaultChecked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
               </li>

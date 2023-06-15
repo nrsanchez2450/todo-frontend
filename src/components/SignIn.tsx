@@ -22,7 +22,6 @@ export default function SignIn() {
       changeUser(username);
       navigate("/");
     } else {
-      // TODO: Notify user of wrong password or no account
       alert("Incorrect credentials");
     }
   };
