@@ -20,6 +20,8 @@ export default function SignIn() {
     });
     if (response.status === 201) {
       changeUser(username);
+      const responseJson = await response.json();
+      localStorage.setItem("token", JSON.stringify(responseJson));
       navigate("/");
     } else {
       alert("Incorrect credentials");

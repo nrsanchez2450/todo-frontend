@@ -21,14 +21,15 @@ function HomePage(): JSX.Element {
   useEffect(() => {
     async function loadUser() {
       if (!username) {
+        const token = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/checkToken`, {
-          method: "GET",
-          credentials: "include",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: token?.slice(1, -1) }),
         });
-        if (response.ok) {
-          alert("here1");
+        if (response.status === 200) {
           const responseJson = await response.json();
-          changeUser(responseJson.user);
+          changeUser(responseJson);
         } else {
           navigate("/SignIn");
         }
@@ -58,9 +59,13 @@ function HomePage(): JSX.Element {
         );
       }
     }
-    loadUser();
-    fetchTasks();
-  }, []);
+    async function loadData() {
+      await loadUser();
+      await fetchTasks();
+    }
+
+    loadData();
+  }, [username]);
 
   function addToDB(body: string) {
     fetch(`${BASE_URL}/addTask`, {
@@ -71,6 +76,7 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ user: username, body: body }),
     });
   }
+
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
@@ -135,6 +141,7 @@ function HomePage(): JSX.Element {
   };
 
   const handleSignOut = (): void => {
+    localStorage.removeItem("token");
     navigate("/SignIn");
   };
 
