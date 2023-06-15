@@ -17,8 +17,25 @@ function HomePage(): JSX.Element {
   const navigate = useNavigate();
   const changeUser = useContext(ChangeUserContext);
 
-  // Loading user's task on login
+  // Loading user and tasks on login
   useEffect(() => {
+    async function loadUser() {
+      if (username) {
+        return;
+      } else {
+        try {
+          const response = await fetch(`${BASE_URL}/checkToken`, {
+            method: "GET",
+            credentials: "include",
+          });
+          const responseJson = await response.json();
+          changeUser(responseJson.user);
+        } catch (e) {
+          alert(e);
+        }
+      }
+    }
+
     async function fetchTasks() {
       const response = await fetch(`${BASE_URL}/getTasks`, {
         method: "POST",
@@ -42,14 +59,9 @@ function HomePage(): JSX.Element {
         );
       }
     }
+    loadUser();
     fetchTasks();
   }, []);
-
-  useEffect(() => {
-    if (!username) {
-      navigate("/SignIn");
-    }
-  }, [username]);
 
   function addToDB(body: string) {
     fetch(`${BASE_URL}/addTask`, {
