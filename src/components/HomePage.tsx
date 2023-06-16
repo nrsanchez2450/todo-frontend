@@ -67,6 +67,12 @@ function HomePage(): JSX.Element {
     loadData();
   }, [username]);
 
+  useEffect(() => {
+    if (!username) {
+      navigate("/SignIn");
+    }
+  }, []);
+
   function addToDB(body: string) {
     fetch(`${BASE_URL}/addTask`, {
       method: "POST",
