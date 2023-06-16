@@ -60,18 +60,13 @@ function HomePage(): JSX.Element {
       }
     }
     async function loadData() {
+      if (!localStorage.getItem("token")) navigate("/SignIn");
       await loadUser();
       await fetchTasks();
     }
 
     loadData();
   }, [username]);
-
-  useEffect(() => {
-    if (!username) {
-      navigate("/SignIn");
-    }
-  }, []);
 
   function addToDB(body: string) {
     fetch(`${BASE_URL}/addTask`, {
