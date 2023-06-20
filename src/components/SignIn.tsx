@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL, ChangeUserContext } from "../App";
+import "../styles/SignIn.css";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
@@ -31,8 +32,16 @@ export default function SignIn() {
   return (
     <>
       <form onSubmit={handleSignIn}>
-        <Stack m={"auto"} mt={"12.5%"} width={"40%"} spacing={2.5}>
-          <Typography variant="h4">Sign in</Typography>
+        <Stack
+          className="stack"
+          m={"auto"}
+          mt={"12.5%"}
+          width={"30%"}
+          spacing={2.5}
+        >
+          <Typography variant="h4" className="sign-in-header">
+            Sign in
+          </Typography>
 
           <div>
             <Typography variant="h6">Username</Typography>
@@ -62,7 +71,7 @@ export default function SignIn() {
           <Button type="submit" variant="contained" color="secondary" fullWidth>
             Sign In
           </Button>
-          <Typography>
+          <Typography className="footer">
             Don't have an account?
             <Link to={"/SignUp"}>
               <Button variant="text" color="secondary">
