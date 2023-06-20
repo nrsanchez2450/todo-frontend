@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL, ChangeUserContext } from "../App";
-import "../styles/SignIn.css";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
